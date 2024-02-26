@@ -5,11 +5,6 @@ import indexRoutes from "./routes/index.routes.js";
 
 const app = express();
 
-import {PORT} from "./config.js";
-
-app.listen(PORT);
-console.log(`Server on port http://localhost:${PORT}`);
-
 // Middlewares
 app.use(morgan("dev"));
 app.use(express.json());
