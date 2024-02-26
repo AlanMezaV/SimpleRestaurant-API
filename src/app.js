@@ -2,6 +2,7 @@ import express from "express";
 import morgan from "morgan";
 
 import indexRoutes from "./routes/index.routes.js";
+import employeesRoutes from "./routes/employees.routes.js";
 
 const app = express();
 
@@ -11,20 +12,10 @@ app.use(express.json());
 
 // Routes
 app.use("/", indexRoutes);
+app.use("/api", employeesRoutes);
 
 app.use((req, res, next) => {
 	res.status(404).json({message: "Not found"});
-});
-
-//Mostrar todos los alumnos
-app.get("/api/alumnos", (req, res) => {
-	conexion.query("SELECT * FROM alumnos", (error, filas) => {
-		if (error) {
-			throw error;
-		} else {
-			res.send(filas);
-		}
-	});
 });
 
 export default app;
