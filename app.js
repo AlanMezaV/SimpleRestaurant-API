@@ -6,10 +6,10 @@ app.use(express.json());
 
 //Configuramos la conexion
 var conexion = mysql.createConnection({
-	host: "localhost",
+	host: "roundhouse.proxy.rlwy.net",
 	user: "root",
-	password: "",
-	database: "simplerestaurant",
+	password: "GFCHg3CChDbB6ceEFaCEDB-chG3B4GdC",
+	database: "railway",
 });
 
 const cors = require("cors");
