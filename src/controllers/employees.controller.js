@@ -30,9 +30,10 @@ export const getEmployee = async (req, res) => {
 export const deleteEmployee = async (req, res) => {
 	try {
 		const {id} = req.params;
-		const [rows] = await pool.query("DELETE FROM EMPLEADOS WHERE id = ?", [
-			id,
-		]);
+		const [rows] = await pool.query(
+			"DELETE FROM EMPLEADOS WHERE IDEmpleado = ?",
+			[id]
+		);
 
 		if (rows.affectedRows <= 0) {
 			return res.status(404).json({message: "Employee not found"});
@@ -46,12 +47,46 @@ export const deleteEmployee = async (req, res) => {
 
 export const createEmployee = async (req, res) => {
 	try {
-		const {name, salary} = req.body;
+		const {
+			NombreEmp,
+			ApellidosEmp,
+			IDPuesto,
+			NSS,
+			RFC,
+			Direccion,
+			Telefono,
+			Email,
+			FechaContratacion,
+			Salario,
+		} = req.body;
 		const [rows] = await pool.query(
-			"INSERT INTO EMPLEADOS (name, salary) VALUES (?, ?)",
-			[name, salary]
+			"INSERT INTO EMPLEADOS (NombreEmp, ApellidosEmp, IDPuesto, NSS, RFC, Direccion, Telefono, Email, FechaContratacion, Salario) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+			[
+				NombreEmp,
+				ApellidosEmp,
+				IDPuesto,
+				NSS,
+				RFC,
+				Direccion,
+				Telefono,
+				Email,
+				FechaContratacion,
+				Salario,
+			]
 		);
-		res.status(201).json({id: rows.insertId, name, salary});
+		res.status(201).json({
+			id: rows.insertId,
+			NombreEmp,
+			ApellidosEmp,
+			IDPuesto,
+			NSS,
+			RFC,
+			Direccion,
+			Telefono,
+			Email,
+			FechaContratacion,
+			Salario,
+		});
 	} catch (error) {
 		return res.status(500).json({message: "Something goes wrong"});
 	}
