@@ -11,10 +11,10 @@ CREATE TABLE PRODUCTOS (
     IDProducto INT NOT NULL,
     NombreProducto VARCHAR(100),
     IDProveedor INT,
-    IDCategoria INT,
     Cantidad INT,
     CantidadMinima INT,
-    Descontinuado BIT
+    UnidadMedida VARCHAR(50),
+    Precio DECIMAL(10, 2),
 )
 GO
 

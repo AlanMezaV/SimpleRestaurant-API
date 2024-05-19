@@ -2,7 +2,12 @@ import {pool} from "../db.js";
 
 export const getPlatillos = async (req, res) => {
 	try {
-		const [rows] = await pool.query("SELECT * FROM PLATILLOS");
+		const query = `
+            SELECT p.*, g.NombreGrupo AS NombreGrupo
+            FROM PLATILLOS p
+            INNER JOIN GRUPOPLATILLOS g ON p.Grupo = g.IDGrupo
+        `;
+		const [rows] = await pool.query(query);
 		res.json(rows);
 	} catch (error) {
 		return res.status(500).json({message: "Something goes wrong"});
