@@ -3,9 +3,9 @@ import {pool} from "../db.js";
 export const getEmployees = async (req, res) => {
 	try {
 		const query = `
-            SELECT e.*, p.Nombre AS NombrePuesto
+            SELECT e.*, puesto.Nombre AS NombrePuesto
             FROM EMPLEADOS e
-            INNER JOIN PUESTOS p ON e.IDPuesto = p.IDPuesto
+            INNER JOIN PUESTOS puesto ON e.IDPuesto = puesto.IDPuesto
         `;
 		const [rows] = await pool.query(query);
 		res.json(rows);
