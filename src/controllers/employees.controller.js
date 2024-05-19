@@ -102,12 +102,30 @@ export const createEmployee = async (req, res) => {
 export const updateEmployee = async (req, res) => {
 	try {
 		const {id} = req.params;
-		const {NombreEmp, Telefono, ApellidosEmp, NSS, RFC, Direccion, Email} =
-			req.body;
+		const {
+			NombreEmp,
+			Telefono,
+			ApellidosEmp,
+			NSS,
+			RFC,
+			Direccion,
+			Email,
+			IDPuesto,
+		} = req.body;
 
 		const [result] = await pool.query(
-			"UPDATE EMPLEADOS SET NombreEmp = ?, Telefono = ?, ApellidosEmp = ?, NSS = ?, RFC = ?, Direccion = ?, Email = ? WHERE IDEmpleado = ?",
-			[NombreEmp, Telefono, ApellidosEmp, NSS, RFC, Direccion, Email, id]
+			"UPDATE EMPLEADOS SET NombreEmp = ?, Telefono = ?, ApellidosEmp = ?, NSS = ?, RFC = ?, Direccion = ?, Email = ?, IDPuesto = ? WHERE IDEmpleado = ?",
+			[
+				NombreEmp,
+				Telefono,
+				ApellidosEmp,
+				NSS,
+				RFC,
+				Direccion,
+				Email,
+				IDPuesto,
+				id,
+			]
 		);
 
 		if (result.affectedRows === 0)
