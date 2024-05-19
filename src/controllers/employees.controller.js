@@ -99,26 +99,27 @@ export const createEmployee = async (req, res) => {
 		return res.status(500).json({message: "Something goes wrong"});
 	}
 };
-
 export const updateEmployee = async (req, res) => {
 	try {
 		const {id} = req.params;
-		const {name, salary} = req.body;
+		const {NombreEmp, Telefono, ApellidosEmp, NSS, RFC, Direccion, Email} =
+			req.body;
 
 		const [result] = await pool.query(
-			"UPDATE EMPLEADOS SET name = IFNULL(?, name), salary = IFNULL(?, salary) WHERE id = ?",
-			[name, salary, id]
+			"UPDATE EMPLEADOS SET NombreEmp = ?, Telefono = ?, ApellidosEmp = ?, NSS = ?, RFC = ?, Direccion = ?, Email = ? WHERE IDEmpleado = ?",
+			[NombreEmp, Telefono, ApellidosEmp, NSS, RFC, Direccion, Email, id]
 		);
 
 		if (result.affectedRows === 0)
-			return res.status(404).json({message: "Employee not found"});
+			return res.status(404).json({message: "Empleado no encontrado"});
 
-		const [rows] = await pool.query("SELECT * FROM EMPLEADOS WHERE id = ?", [
-			id,
-		]);
+		const [rows] = await pool.query(
+			"SELECT * FROM EMPLEADOS WHERE IDEmpleado = ?",
+			[id]
+		);
 
 		res.json(rows[0]);
 	} catch (error) {
-		return res.status(500).json({message: "Something goes wrong"});
+		return res.status(500).json({message: `Algo salió mal: ${error.message}`});
 	}
 };
