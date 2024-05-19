@@ -18,7 +18,9 @@ export const getEmployee = async (req, res) => {
 	try {
 		const {id} = req.params;
 		const [rows] = await pool.query(
-			"SELECT * FROM EMPLEADOS WHERE IDEmpleado = ?",
+			`SELECT * FROM EMPLEADOS 
+            INNER JOIN PUESTOS puesto ON e.IDPuesto = puesto.IDPuesto
+            WHERE IDEmpleado = ?`,
 			[id]
 		);
 
