@@ -5,7 +5,7 @@ import {
 	getPlatillo,
 	getPlatillos,
 	updatePlatillo,
-} from "../controllers/platillos.controller.js";
+} from "../controllers/dishes.controller.js";
 
 const router = Router();
 
