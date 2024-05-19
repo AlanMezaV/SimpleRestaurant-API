@@ -2,7 +2,12 @@ import {pool} from "../db.js";
 
 export const getEmployees = async (req, res) => {
 	try {
-		const [rows] = await pool.query("SELECT * FROM EMPLEADOS");
+		const query = `
+            SELECT e.*, p.Nombre AS NombrePuesto
+            FROM EMPLEADOS e
+            INNER JOIN PUESTOS p ON e.IDPuesto = p.IDPuesto
+        `;
+		const [rows] = await pool.query(query);
 		res.json(rows);
 	} catch (error) {
 		return res.status(500).json({message: "Something goes wrong"});
@@ -105,10 +110,9 @@ export const updateEmployee = async (req, res) => {
 		if (result.affectedRows === 0)
 			return res.status(404).json({message: "Employee not found"});
 
-		const [rows] = await pool.query(
-			"SELECT * FROM EMPLEADOS WHERE id = ?",
-			[id]
-		);
+		const [rows] = await pool.query("SELECT * FROM EMPLEADOS WHERE id = ?", [
+			id,
+		]);
 
 		res.json(rows[0]);
 	} catch (error) {
