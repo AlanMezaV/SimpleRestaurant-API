@@ -8,10 +8,9 @@ CREATE TABLE PRODUCTOS (
     IDProducto INT NOT NULL AUTO_INCREMENT,
     NombreProducto VARCHAR(100),
     IDProveedor INT,
-    IDCategoria INT,
     Cantidad INT,
-    CantidadMinima INT,
-    Descontinuado BIT,
+    Precio DECIMAL(10, 2),
+    Unidad VARCHAR(50),
     PRIMARY KEY (IDProducto)
 );
 
@@ -20,7 +19,6 @@ CREATE TABLE PROVEEDORES (
     NombreCompania VARCHAR(100),
     NombreContacto VARCHAR(100),
     CargoContacto VARCHAR(100),
-    TelefonoContacto VARCHAR(20),
     TelefonoEmpresa VARCHAR(20),
     PRIMARY KEY (IDProveedor)
 );
